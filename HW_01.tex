@@ -1,0 +1,1417 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={HW\_01},
+            pdfauthor={Chantsal 108035487},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\title{HW\_01}
+\author{Chantsal 108035487}
+\date{4/3/2020}
+
+\begin{document}
+\maketitle
+
+\hypertarget{q1.-try-to-find-the-min-variance-portfolio-for-three-stocks}{%
+\subsection{Q1. Try to find the min variance portfolio for three
+stocks}\label{q1.-try-to-find-the-min-variance-portfolio-for-three-stocks}}
+
+\begin{verbatim}
+    Using 2007-2009 daily returns as the insample data
+    
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(quantmod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: xts
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: zoo
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'zoo'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     as.Date, as.Date.numeric
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: TTR
+\end{verbatim}
+
+\begin{verbatim}
+## Registered S3 method overwritten by 'quantmod':
+##   method            from
+##   as.zoo.data.frame zoo
+\end{verbatim}
+
+\begin{verbatim}
+## Version 0.4-0 included new data defaults. See ?getSymbols.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(plyr)}
+\NormalTok{tickers <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"COST"}\NormalTok{, }\StringTok{"WMT"}\NormalTok{, }\StringTok{"TGT"}\NormalTok{)}
+\KeywordTok{getSymbols}\NormalTok{(tickers, }\DataTypeTok{from=} \StringTok{"2007-01-01"}\NormalTok{, }\DataTypeTok{to=} \StringTok{"2009-12-31"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'getSymbols' currently uses auto.assign=TRUE by default, but will
+## use auto.assign=FALSE in 0.5-0. You will still be able to use
+## 'loadSymbols' to automatically load data. getOption("getSymbols.env")
+## and getOption("getSymbols.auto.assign") will still be checked for
+## alternate defaults.
+## 
+## This message is shown once per session and may be disabled by setting 
+## options("getSymbols.warning4.0"=FALSE). See ?getSymbols for details.
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "COST" "WMT"  "TGT"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data.env<-}\KeywordTok{new.env}\NormalTok{()}
+\KeywordTok{l_ply}\NormalTok{(tickers, }\ControlFlowTok{function}\NormalTok{(sym) }\KeywordTok{try}\NormalTok{(}\KeywordTok{getSymbols}\NormalTok{(sym, }\DataTypeTok{env=}\NormalTok{data.env), }\DataTypeTok{silent=}\NormalTok{T))}
+\NormalTok{stocks <-}\StringTok{ }\NormalTok{tickers[tickers }\OperatorTok{%in%}\StringTok{ }\KeywordTok{ls}\NormalTok{(data.env)]}
+\NormalTok{data <-}\StringTok{ }\KeywordTok{xts}\NormalTok{()}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(stocks)) \{}
+\NormalTok{  symbol <-}\StringTok{ }\NormalTok{stocks[i]}
+\NormalTok{  data <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(data, }\KeywordTok{Ad}\NormalTok{(}\KeywordTok{get}\NormalTok{(symbol, }\DataTypeTok{envir=}\NormalTok{data.env)))}
+\NormalTok{\}}
+
+\KeywordTok{head}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            COST.Adjusted WMT.Adjusted TGT.Adjusted
+## 2007-01-03      39.47904     34.71480     41.03054
+## 2007-01-04      40.39801     34.88271     41.32474
+## 2007-01-05      39.90489     34.59798     41.09513
+## 2007-01-08      40.06926     34.31325     41.15252
+## 2007-01-09      40.36813     34.59798     41.80551
+## 2007-01-10      40.65204     34.51767     41.84137
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## An 'xts' object on 2007-01-03/2020-05-22 containing:
+##   Data: num [1:3371, 1:3] 39.5 40.4 39.9 40.1 40.4 ...
+##  - attr(*, "dimnames")=List of 2
+##   ..$ : NULL
+##   ..$ : chr [1:3] "COST.Adjusted" "WMT.Adjusted" "TGT.Adjusted"
+##   Indexed by objects of class: [POSIXct,POSIXt] TZ: 
+##   xts Attributes:  
+##  NULL
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{con =}\StringTok{ }\KeywordTok{gzcon}\NormalTok{(}\KeywordTok{url}\NormalTok{(}\StringTok{'https://github.com/systematicinvestor/SIT/raw/master/sit.gz'}\NormalTok{, }\StringTok{'rb'}\NormalTok{))}
+\KeywordTok{source}\NormalTok{(con)}
+\KeywordTok{close}\NormalTok{(con)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{in-other-words-you-have-to-compute-optimal-weights-for-2010-01}{%
+\subsection{In other words, you have to compute optimal weights for
+2010-01}\label{in-other-words-you-have-to-compute-optimal-weights-for-2010-01}}
+
+\begin{verbatim}
+    Also given the weights from Q1, compute realized returns for 2010-01.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(fBasics)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: timeDate
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: timeSeries
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'timeSeries'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:zoo':
+## 
+##     time<-
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'fBasics'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked _by_ '.GlobalEnv':
+## 
+##     inv, vec
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:TTR':
+## 
+##     volatility
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(xts)}
+\KeywordTok{library}\NormalTok{(PerformanceAnalytics)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'PerformanceAnalytics'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:timeDate':
+## 
+##     kurtosis, skewness
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:graphics':
+## 
+##     legend
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{firm.data=}\StringTok{ }\NormalTok{data}
+\KeywordTok{str}\NormalTok{(firm.data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## An 'xts' object on 2007-01-03/2020-05-22 containing:
+##   Data: num [1:3371, 1:3] 39.5 40.4 39.9 40.1 40.4 ...
+##  - attr(*, "dimnames")=List of 2
+##   ..$ : NULL
+##   ..$ : chr [1:3] "COST.Adjusted" "WMT.Adjusted" "TGT.Adjusted"
+##   Indexed by objects of class: [POSIXct,POSIXt] TZ: 
+##   xts Attributes:  
+##  NULL
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Sigma =}\StringTok{ }\KeywordTok{cov}\NormalTok{(firm.data)}
+\NormalTok{std =}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{diag}\NormalTok{(Sigma))}
+\NormalTok{ones =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{)     }
+\NormalTok{one.vec =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(ones, }\DataTypeTok{ncol=}\DecValTok{1}\NormalTok{)}
+\NormalTok{a =}\StringTok{ }\KeywordTok{inv}\NormalTok{(Sigma)}\OperatorTok{%*%}\NormalTok{one.vec}
+\NormalTok{b =}\StringTok{ }\KeywordTok{t}\NormalTok{(one.vec)}\OperatorTok{%*%}\NormalTok{a}
+\NormalTok{mvp.w =a }\OperatorTok{/}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(b)}
+\NormalTok{mvp.w}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                     [,1]
+## COST.Adjusted -0.3732524
+## WMT.Adjusted   0.7787558
+## TGT.Adjusted   0.5944966
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mvp.ret<-}\KeywordTok{sum}\NormalTok{((mvp.w)}\OperatorTok{*}\KeywordTok{colMeans}\NormalTok{(firm.data))}
+\NormalTok{mvp.ret}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 37.58636
+\end{verbatim}
+
+\hypertarget{give-me-weights-realized-returns-and-standard-deviation-for-2010-01.}{%
+\subsection{Give me weights, realized returns and standard deviation for
+2010-01.}\label{give-me-weights-realized-returns-and-standard-deviation-for-2010-01.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu<-}\FloatTok{0.05}\OperatorTok{/}\DecValTok{12}
+\NormalTok{return <-}\StringTok{ }\NormalTok{firm.data}
+\NormalTok{Ax <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\DecValTok{2}\OperatorTok{*}\KeywordTok{cov}\NormalTok{(return), }\KeywordTok{colMeans}\NormalTok{(return), }\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\KeywordTok{ncol}\NormalTok{(return)))}
+\NormalTok{Ax <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(Ax, }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{t}\NormalTok{(}\KeywordTok{tail}\NormalTok{(Ax, }\DecValTok{2}\NormalTok{)), }\KeywordTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)))}
+\NormalTok{b0 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{ncol}\NormalTok{(return)), mu, }\DecValTok{1}\NormalTok{)}
+\NormalTok{out<-}\KeywordTok{solve}\NormalTok{(Ax, b0)}
+\NormalTok{wgt<-out[}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{]}
+\NormalTok{wgt}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## COST.Adjusted  WMT.Adjusted  TGT.Adjusted 
+##    -0.8827369    -0.1147639     1.9975008
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(wgt)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ret.out<-}\KeywordTok{sum}\NormalTok{(wgt}\OperatorTok{*}\KeywordTok{colMeans}\NormalTok{(return))}
+\NormalTok{ret.out.annual<-ret.out}\OperatorTok{*}\DecValTok{12}
+\NormalTok{ret.out.annual}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.05
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{std.out<-}\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{t}\NormalTok{(wgt)}\OperatorTok{%*%}\KeywordTok{cov}\NormalTok{(return)}\OperatorTok{%*%}\NormalTok{wgt)}
+\NormalTok{std.out.annual<-std.out}\OperatorTok{*}\KeywordTok{sqrt}\NormalTok{(}\DecValTok{12}\NormalTok{)}
+\NormalTok{std.out.annual}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          [,1]
+## [1,] 118.4935
+\end{verbatim}
+
+\hypertarget{q2.-based-on-q1-you-have-to-use-weekly-and-monthly-returns-to-get-the-answers-to-q1}{%
+\subsection{Q2. Based on Q1, you have to use weekly and monthly returns
+to get the answers to
+Q1}\label{q2.-based-on-q1-you-have-to-use-weekly-and-monthly-returns-to-get-the-answers-to-q1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{(}\DataTypeTok{list=}\KeywordTok{ls}\NormalTok{())}
+\NormalTok{con =}\StringTok{ }\KeywordTok{gzcon}\NormalTok{(}\KeywordTok{url}\NormalTok{(}\StringTok{'https://github.com/systematicinvestor/SIT/raw/master/sit.gz'}\NormalTok{, }\StringTok{'rb'}\NormalTok{))}
+\KeywordTok{source}\NormalTok{(con)}
+\KeywordTok{close}\NormalTok{(con)}
+\KeywordTok{library}\NormalTok{(quantmod)}
+\NormalTok{tickers <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"COST"}\NormalTok{,}\StringTok{"WMT"}\NormalTok{,}\StringTok{"TGT"}\NormalTok{)}
+\NormalTok{n <-}\StringTok{ }\KeywordTok{length}\NormalTok{(tickers)}
+
+\NormalTok{data <-}\StringTok{ }\KeywordTok{new.env}\NormalTok{()}
+\KeywordTok{getSymbols}\NormalTok{(tickers, }\DataTypeTok{src =} \StringTok{'yahoo'}\NormalTok{, }\DataTypeTok{from =} \StringTok{'2007-01-01'}\NormalTok{,}\DataTypeTok{to=} \StringTok{'2009-12-31'}\NormalTok{, }\DataTypeTok{env =}\NormalTok{ data, }\DataTypeTok{auto.assign =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "COST" "WMT"  "TGT"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{ls}\NormalTok{(data)) data[[i]] =}\StringTok{ }\KeywordTok{adjustOHLC}\NormalTok{(data[[i]], }\DataTypeTok{use.Adjusted=}\NormalTok{T)}
+
+\NormalTok{data.monthly <-}\StringTok{ }\KeywordTok{new.env}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in}\NormalTok{ tickers) data.monthly[[i]] =}\StringTok{ }\KeywordTok{to.monthly}\NormalTok{(data[[i]], }\DataTypeTok{indexAt=}\StringTok{'endof'}\NormalTok{)}
+\NormalTok{data.monthly}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <environment: 0x55d3e6523ec8>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{bt.prep}\NormalTok{(data, }\DataTypeTok{align=}\StringTok{'remove.na'}\NormalTok{, }\DataTypeTok{fill.gaps =}\NormalTok{ T)}
+\KeywordTok{names}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "prices"          "COST"            "dates"           "WMT"            
+## [5] "weight"          ".getSymbols"     "TGT"             "symbolnames"    
+## [9] "execution.price"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(data}\OperatorTok{$}\NormalTok{prices)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                COST      TGT      WMT
+## 2007-01-03 39.47904 41.03054 34.71480
+## 2007-01-04 40.39801 41.32474 34.88271
+## 2007-01-05 39.90489 41.09513 34.59798
+## 2007-01-08 40.06926 41.15252 34.31325
+## 2007-01-09 40.36813 41.80551 34.59798
+## 2007-01-10 40.65204 41.84137 34.51767
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(data}\OperatorTok{$}\NormalTok{weight)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            COST TGT WMT
+## 2007-01-03   NA  NA  NA
+## 2007-01-04   NA  NA  NA
+## 2007-01-05   NA  NA  NA
+## 2007-01-08   NA  NA  NA
+## 2007-01-09   NA  NA  NA
+## 2007-01-10   NA  NA  NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prices <-}\StringTok{ }\NormalTok{data}\OperatorTok{$}\NormalTok{prices   }
+\NormalTok{ret <-}\StringTok{ }\NormalTok{prices}\OperatorTok{/}\KeywordTok{mlag}\NormalTok{(prices)}\OperatorTok{-}\StringTok{ }\DecValTok{1}
+\KeywordTok{head}\NormalTok{(ret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                    COST           TGT          WMT
+## 2007-01-03           NA            NA           NA
+## 2007-01-04  0.023277568  0.0071702932  0.004836986
+## 2007-01-05 -0.012206590 -0.0055561389 -0.008162467
+## 2007-01-08  0.004119069  0.0013962723 -0.008229757
+## 2007-01-09  0.007458760  0.0158676329  0.008298048
+## 2007-01-10  0.007032999  0.0008579013 -0.002321349
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ret<-}\StringTok{ }\NormalTok{ret[}\OperatorTok{-}\DecValTok{1}\NormalTok{, ]}
+\KeywordTok{head}\NormalTok{(ret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                    COST           TGT          WMT
+## 2007-01-04  0.023277568  0.0071702932  0.004836986
+## 2007-01-05 -0.012206590 -0.0055561389 -0.008162467
+## 2007-01-08  0.004119069  0.0013962723 -0.008229757
+## 2007-01-09  0.007458760  0.0158676329  0.008298048
+## 2007-01-10  0.007032999  0.0008579013 -0.002321349
+## 2007-01-11  0.016725065  0.0257248489  0.006768215
+\end{verbatim}
+
+\hypertarget{use-weekly}{%
+\subsubsection{Use weekly}\label{use-weekly}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tibbletime)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'tibbletime'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:timeSeries':
+## 
+##     filter
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:stats':
+## 
+##     filter
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(timetk)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: recipes
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: dplyr
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked _by_ '.GlobalEnv':
+## 
+##     count, lst
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:timeSeries':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:plyr':
+## 
+##     arrange, count, desc, failwith, id, mutate, rename, summarise,
+##     summarize
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:xts':
+## 
+##     first, last
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'recipes'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:stats':
+## 
+##     step
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weekly <-}\StringTok{ }\NormalTok{prices }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{tk_tbl}\NormalTok{(}\DataTypeTok{rename_index=} \StringTok{"date"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{as_tbl_time}\NormalTok{(}\DataTypeTok{index=}\NormalTok{ date) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{as_period}\NormalTok{(}\DataTypeTok{period=} \StringTok{"week"}\NormalTok{, }\DataTypeTok{side=} \StringTok{"end"}\NormalTok{)}
+
+\CommentTok{#Q1. min variance }
+\KeywordTok{str}\NormalTok{(weekly[,}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Classes 'tbl_df', 'tbl' and 'data.frame':    157 obs. of  3 variables:
+##  $ COST: num  39.9 41.8 42.4 41.4 41.8 ...
+##  $ TGT : num  41.1 43.3 44.7 43.2 44.5 ...
+##  $ WMT : num  34.6 35 35.3 34.8 35.1 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Sigma.w =}\StringTok{ }\KeywordTok{cov}\NormalTok{(weekly[,}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{])}
+\NormalTok{std =}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{diag}\NormalTok{(Sigma.w))}
+\NormalTok{ones =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{)     }
+\NormalTok{one.vec =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(ones, }\DataTypeTok{ncol=}\DecValTok{1}\NormalTok{)}
+\NormalTok{a =}\StringTok{ }\KeywordTok{inv}\NormalTok{(Sigma.w)}\OperatorTok{%*%}\NormalTok{one.vec}
+\NormalTok{b =}\StringTok{ }\KeywordTok{t}\NormalTok{(one.vec)}\OperatorTok{%*%}\NormalTok{a}
+\NormalTok{mvp.w.w =a }\OperatorTok{/}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(b)}
+\NormalTok{mvp.w.w}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            [,1]
+## COST -0.2189428
+## TGT   0.3649845
+## WMT   0.8539583
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mvp.ret.w<-}\KeywordTok{sum}\NormalTok{((mvp.w.w)}\OperatorTok{*}\KeywordTok{colMeans}\NormalTok{(weekly[,}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{]))}
+\NormalTok{mvp.ret.w}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 36.19774
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu.w<-}\FloatTok{0.05}\OperatorTok{/}\DecValTok{12}
+\NormalTok{return<-}\StringTok{ }\NormalTok{weekly[,}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{]}
+\NormalTok{Ax <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\DecValTok{2}\OperatorTok{*}\KeywordTok{cov}\NormalTok{(return), }\KeywordTok{colMeans}\NormalTok{(return), }\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\KeywordTok{ncol}\NormalTok{(return)))}
+\NormalTok{Ax <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(Ax, }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{t}\NormalTok{(}\KeywordTok{tail}\NormalTok{(Ax, }\DecValTok{2}\NormalTok{)), }\KeywordTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)))}
+\NormalTok{b0 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{ncol}\NormalTok{(return)), mu.w, }\DecValTok{1}\NormalTok{)}
+\NormalTok{out.w<-}\KeywordTok{solve}\NormalTok{(Ax, b0)}
+\NormalTok{wgt<-out.w[}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{]}
+\NormalTok{wgt}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      COST       TGT       WMT 
+## -5.473517  3.153192  3.320325
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(wgt)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ret.out<-}\KeywordTok{sum}\NormalTok{(wgt}\OperatorTok{*}\KeywordTok{colMeans}\NormalTok{(return))}
+\NormalTok{ret.out.annual<-ret.out}\OperatorTok{*}\DecValTok{12}
+\NormalTok{ret.out.annual}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.05
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{std.out<-}\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{t}\NormalTok{(wgt)}\OperatorTok{%*%}\KeywordTok{cov}\NormalTok{(return)}\OperatorTok{%*%}\NormalTok{wgt)}
+\NormalTok{std.out.annual<-std.out}\OperatorTok{*}\KeywordTok{sqrt}\NormalTok{(}\DecValTok{12}\NormalTok{)}
+\NormalTok{std.out.annual}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          [,1]
+## [1,] 80.04875
+\end{verbatim}
+
+\hypertarget{use-montly-data}{%
+\subsubsection{use montly data}\label{use-montly-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ monthly <-}\StringTok{ }\NormalTok{prices }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{tk_tbl}\NormalTok{(}\DataTypeTok{rename_index=} \StringTok{"date"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{as_tbl_time}\NormalTok{(}\DataTypeTok{index=}\NormalTok{ date) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{as_period}\NormalTok{(}\DataTypeTok{period=} \StringTok{"month"}\NormalTok{, }\DataTypeTok{side=} \StringTok{"end"}\NormalTok{)}
+
+\CommentTok{#Q1. min variance }
+\KeywordTok{str}\NormalTok{(monthly[,}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Classes 'tbl_df', 'tbl' and 'data.frame':    36 obs. of  3 variables:
+##  $ COST: num  42 41.9 40.3 40.2 42.4 ...
+##  $ TGT : num  44 44.2 42.6 42.7 45 ...
+##  $ WMT : num  34.8 35.3 34.4 35.2 35.1 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Sigma.m =}\StringTok{ }\KeywordTok{cov}\NormalTok{(monthly[,}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{])}
+\NormalTok{std =}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{diag}\NormalTok{(Sigma.m))}
+\NormalTok{ones =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{)     }
+\NormalTok{one.vec =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(ones, }\DataTypeTok{ncol=}\DecValTok{1}\NormalTok{)}
+\NormalTok{a =}\StringTok{ }\KeywordTok{inv}\NormalTok{(Sigma.m)}\OperatorTok{%*%}\NormalTok{one.vec}
+\NormalTok{b =}\StringTok{ }\KeywordTok{t}\NormalTok{(one.vec)}\OperatorTok{%*%}\NormalTok{a}
+\NormalTok{mvp.w.m =a }\OperatorTok{/}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(b)}
+\NormalTok{mvp.w.m}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            [,1]
+## COST -0.2573111
+## TGT   0.4126788
+## WMT   0.8446323
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mvp.ret.m<-}\KeywordTok{sum}\NormalTok{((mvp.w.m)}\OperatorTok{*}\KeywordTok{colMeans}\NormalTok{(monthly[,}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{]))}
+\NormalTok{mvp.ret.m}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 35.97238
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu.m<-}\FloatTok{0.05}\OperatorTok{/}\DecValTok{12}
+\NormalTok{return.m<-monthly[,}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{]}
+\NormalTok{Ax.m <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\DecValTok{2}\OperatorTok{*}\KeywordTok{cov}\NormalTok{(return.m), }\KeywordTok{colMeans}\NormalTok{(return.m), }\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\KeywordTok{ncol}\NormalTok{(return.m)))}
+\NormalTok{Ax.m <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(Ax, }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{t}\NormalTok{(}\KeywordTok{tail}\NormalTok{(Ax.m, }\DecValTok{2}\NormalTok{)), }\KeywordTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)))}
+\NormalTok{b0 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{ncol}\NormalTok{(return.m)), mu.m, }\DecValTok{1}\NormalTok{)}
+\NormalTok{out.m<-}\KeywordTok{solve}\NormalTok{(Ax, b0)}
+\NormalTok{wgt.m<-out.m[}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{]}
+\NormalTok{wgt.m}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      COST       TGT       WMT 
+## -5.473517  3.153192  3.320325
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(wgt.m)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ret.out.m<-}\KeywordTok{sum}\NormalTok{(wgt.m}\OperatorTok{*}\KeywordTok{colMeans}\NormalTok{(return.m))}
+\NormalTok{ret.out.annual.m<-ret.out.m}\OperatorTok{*}\DecValTok{12}
+\NormalTok{ret.out.annual.m}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -1.669898
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{std.out<-}\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{t}\NormalTok{(wgt)}\OperatorTok{%*%}\KeywordTok{cov}\NormalTok{(return)}\OperatorTok{%*%}\NormalTok{wgt)}
+\NormalTok{std.out.annual<-std.out}\OperatorTok{*}\KeywordTok{sqrt}\NormalTok{(}\DecValTok{12}\NormalTok{)}
+\NormalTok{std.out.annual}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          [,1]
+## [1,] 80.04875
+\end{verbatim}
+
+\hypertarget{q3.-find-the-tangency-portfolio-based-on-q2.}{%
+\subsection{Q3. Find the tangency portfolio based on
+Q2.}\label{q3.-find-the-tangency-portfolio-based-on-q2.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mean <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(ret, }\DecValTok{2}\NormalTok{, mean)}
+\NormalTok{mean}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         COST          TGT          WMT 
+## 0.0004121229 0.0002460886 0.0003854026
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{var <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(ret, }\DecValTok{2}\NormalTok{, var)}
+\NormalTok{var}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         COST          TGT          WMT 
+## 0.0003964410 0.0008174913 0.0002671033
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{summary <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(ret, }\DecValTok{2}\NormalTok{, summary)}
+\KeywordTok{apply}\NormalTok{(ret, }\DecValTok{2}\NormalTok{, skewness)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      COST       TGT       WMT 
+## 0.2087881 0.2928746 0.4343347
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cov.matrix <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{cov}\NormalTok{(ret), }\DataTypeTok{ncol =}\DecValTok{3}\NormalTok{)}
+\NormalTok{cov.matrix}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              [,1]         [,2]         [,3]
+## [1,] 0.0003964410 0.0003702950 0.0002106665
+## [2,] 0.0003702950 0.0008174913 0.0002875380
+## [3,] 0.0002106665 0.0002875380 0.0002671033
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(mean, }\DataTypeTok{ncol=}\DecValTok{1}\NormalTok{)}
+\NormalTok{mu}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              [,1]
+## [1,] 0.0004121229
+## [2,] 0.0002460886
+## [3,] 0.0003854026
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rf <-}\StringTok{ }\FloatTok{0.005}
+\NormalTok{numerator <-}\StringTok{ }\KeywordTok{solve}\NormalTok{(cov.matrix)}\OperatorTok{%*%}\StringTok{ }\NormalTok{(mu }\OperatorTok{-}\StringTok{ }\NormalTok{rf}\OperatorTok{*}\NormalTok{one.vec)}
+\NormalTok{denominator <-}\KeywordTok{t}\NormalTok{(one.vec)}\OperatorTok{%*%}\StringTok{ }\NormalTok{numerator}
+\NormalTok{tangency.weight <-numerator}\OperatorTok{/}\KeywordTok{as.numeric}\NormalTok{(denominator)}
+\NormalTok{tangency.return<-}\StringTok{ }\KeywordTok{t}\NormalTok{(mu)}\OperatorTok{%*%}\StringTok{ }\NormalTok{tangency.weight}
+\NormalTok{tangency.var <-}\StringTok{ }\KeywordTok{t}\NormalTok{(tangency.weight) }\OperatorTok{%*%}\StringTok{ }\NormalTok{cov.matrix }\OperatorTok{%*%}\NormalTok{tangency.weight}
+\NormalTok{tangency.std <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(tangency.var))}
+\NormalTok{Sharperatio <-}\StringTok{ }\NormalTok{(tangency.return}\OperatorTok{/}\NormalTok{tangency.std)}
+\NormalTok{Sharperatio}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            [,1]
+## [1,] 0.02589656
+\end{verbatim}
+
+\#HW\_02 \#\# Q1. Find the tangency portfolio with no short-sale
+constraint. Risk-free rate is assumed to be 1\% per annum.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(quantmod)}
+\KeywordTok{library}\NormalTok{(plyr)}
+\KeywordTok{library}\NormalTok{(xts)}
+\KeywordTok{library}\NormalTok{(quadprog)}
+\KeywordTok{library}\NormalTok{(fBasics)}
+\KeywordTok{library}\NormalTok{(stats)}
+\NormalTok{tickers <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"COST"}\NormalTok{, }\StringTok{"WMT"}\NormalTok{, }\StringTok{"TGT"}\NormalTok{)}
+\KeywordTok{getSymbols}\NormalTok{(tickers, }\DataTypeTok{from=} \StringTok{"2007-01-01"}\NormalTok{, }\DataTypeTok{to=} \StringTok{"2009-12-31"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "COST" "WMT"  "TGT"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data.env<-}\KeywordTok{new.env}\NormalTok{()}
+\KeywordTok{l_ply}\NormalTok{(tickers, }\ControlFlowTok{function}\NormalTok{(sym) }\KeywordTok{try}\NormalTok{(}\KeywordTok{getSymbols}\NormalTok{(sym, }\DataTypeTok{env=}\NormalTok{data.env), }\DataTypeTok{silent=}\NormalTok{T))}
+\NormalTok{stocks <-}\StringTok{ }\NormalTok{tickers[tickers }\OperatorTok{%in%}\StringTok{ }\KeywordTok{ls}\NormalTok{(data.env)]}
+\NormalTok{data <-}\StringTok{ }\KeywordTok{xts}\NormalTok{()}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(stocks)) \{}
+\NormalTok{  symbol <-}\StringTok{ }\NormalTok{stocks[i]}
+\NormalTok{  data <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(data, }\KeywordTok{Ad}\NormalTok{(}\KeywordTok{get}\NormalTok{(symbol, }\DataTypeTok{envir=}\NormalTok{data.env)))}
+\NormalTok{\}}
+
+
+\NormalTok{mu =}\StringTok{ }\KeywordTok{apply}\NormalTok{(data, }\DecValTok{2}\NormalTok{, mean)}
+\NormalTok{Sigma =}\StringTok{ }\KeywordTok{cov}\NormalTok{(data)}
+\NormalTok{std =}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{diag}\NormalTok{(Sigma))}
+\NormalTok{Amat1 =}\StringTok{ }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{),mu, }\KeywordTok{diag}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DataTypeTok{nrow=}\DecValTok{3}\NormalTok{))  }
+\KeywordTok{t}\NormalTok{(Amat1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    COST.Adjusted WMT.Adjusted TGT.Adjusted
+##           1.0000      1.00000       1.0000
+## mu      114.8834     61.85593      54.3253
+##           1.0000      0.00000       0.0000
+##           0.0000      1.00000       0.0000
+##           0.0000      0.00000       1.0000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# muP = seq(.01,.08,length=300)  # set of 300 possible target values }
+\CommentTok{# When short sales are prohibited, the target expected return on the }
+\CommentTok{# portfolio must lie between the smallest }
+\CommentTok{# and largest expected returns on the stocks. }
+\NormalTok{muP =}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(mu)}\OperatorTok{+}\NormalTok{.}\DecValTok{0001}\NormalTok{,}\KeywordTok{max}\NormalTok{(mu)}\OperatorTok{-}\NormalTok{.}\DecValTok{0001}\NormalTok{,}\DataTypeTok{length=}\DecValTok{300}\NormalTok{)}
+\NormalTok{sdP =}\StringTok{ }\NormalTok{muP }\CommentTok{# set up storage for standard deviations of portfolio returns}
+\NormalTok{weights =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DataTypeTok{nrow=}\DecValTok{300}\NormalTok{,}\DataTypeTok{ncol=}\DecValTok{3}\NormalTok{) }\CommentTok{# storage for portfolio weights}
+
+\NormalTok{i=}\DecValTok{1}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(muP))  }\CommentTok{# find the optimal portfolios for each target expected return}
+\NormalTok{\{}
+\NormalTok{  bvec1 =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,muP[i], }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{))  }\CommentTok{# constraint vector}
+\NormalTok{  result =}\StringTok{ }\KeywordTok{solve.QP}\NormalTok{(}\DataTypeTok{Dmat=}\DecValTok{2}\OperatorTok{*}\NormalTok{Sigma,}\DataTypeTok{dvec=}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{),}\DataTypeTok{Amat=}\NormalTok{Amat1,}\DataTypeTok{bvec=}\NormalTok{bvec1,}\DataTypeTok{meq=}\DecValTok{2}\NormalTok{)}
+\NormalTok{  sdP[i] =}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(result}\OperatorTok{$}\NormalTok{value)}
+\NormalTok{  weights[i,] =}\StringTok{ }\NormalTok{result}\OperatorTok{$}\NormalTok{solution}
+\NormalTok{\}}
+
+
+\KeywordTok{plot}\NormalTok{(sdP,muP,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.25}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.08}\NormalTok{),}\DataTypeTok{lty=}\DecValTok{1}\NormalTok{)}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{new=}\OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(sdP,muP,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.25}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.08}\NormalTok{),}\DataTypeTok{lty=}\DecValTok{1}\NormalTok{, }\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
+\NormalTok{mufree =}\StringTok{ }\FloatTok{0.01}\OperatorTok{/}\DecValTok{12} \CommentTok{# input value of risk-free interest rate}
+\KeywordTok{points}\NormalTok{(}\DecValTok{0}\NormalTok{,mufree,}\DataTypeTok{cex=}\DecValTok{3}\NormalTok{, }\DataTypeTok{pch=}\StringTok{"*"}\NormalTok{)  }\CommentTok{# show risk-free asset}
+\NormalTok{sharpe =( muP}\OperatorTok{-}\NormalTok{mufree)}\OperatorTok{/}\NormalTok{sdP }\CommentTok{# compute Sharpe ratios}
+\NormalTok{ind =}\StringTok{ }\NormalTok{(sharpe }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(sharpe)) }\CommentTok{# Find maximum Sharpe ratio}
+\KeywordTok{options}\NormalTok{(}\DataTypeTok{digits=}\DecValTok{3}\NormalTok{)}
+\NormalTok{weights[ind,] }\CommentTok{# Find tangency portfolio# show line of optimal portfolios}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.000 0.377 0.623
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{lines}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{),mufree}\OperatorTok{+}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{)}\OperatorTok{*}\NormalTok{(muP[ind]}\OperatorTok{-}\NormalTok{mufree)}\OperatorTok{/}\NormalTok{sdP[ind],}\DataTypeTok{lwd=}\DecValTok{2}\NormalTok{,}\DataTypeTok{lty=}\DecValTok{3}\NormalTok{)}
+\CommentTok{# show line of optimal portfolios}
+\KeywordTok{points}\NormalTok{(sdP[ind],muP[ind],}\DataTypeTok{cex=}\DecValTok{1}\NormalTok{,}\DataTypeTok{pch=}\DecValTok{19}\NormalTok{, }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{) }\CommentTok{# show tangency portfolio}
+\NormalTok{ind2 =}\StringTok{ }\NormalTok{(sdP }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(sdP)) }\CommentTok{# find the minimum variance portfolio}
+\KeywordTok{points}\NormalTok{(sdP[ind2],muP[ind2],}\DataTypeTok{cex=}\DecValTok{2}\NormalTok{,}\DataTypeTok{pch=}\StringTok{"+"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{) }\CommentTok{# show minimum variance portfolio}
+\NormalTok{ind3 =}\StringTok{ }\NormalTok{(muP }\OperatorTok{>}\StringTok{ }\NormalTok{muP[ind2])}
+\KeywordTok{lines}\NormalTok{(sdP[ind3],muP[ind3],}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,.}\DecValTok{25}\NormalTok{),}
+      \DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,.}\DecValTok{08}\NormalTok{),}\DataTypeTok{lwd=}\DecValTok{1}\NormalTok{)  }\CommentTok{#  plot the efficient frontier}
+\KeywordTok{points}\NormalTok{(}\KeywordTok{c}\NormalTok{(std[}\DecValTok{1}\NormalTok{],std[}\DecValTok{2}\NormalTok{], std[}\DecValTok{3}\NormalTok{]), }\KeywordTok{c}\NormalTok{(mu[}\DecValTok{1}\NormalTok{], mu[}\DecValTok{2}\NormalTok{], mu[}\DecValTok{3}\NormalTok{]), }\DataTypeTok{cex=}\DecValTok{1}\NormalTok{, }\DataTypeTok{pch=}\StringTok{"o"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{) }
+\KeywordTok{text}\NormalTok{(std[}\DecValTok{1}\NormalTok{],mu[}\DecValTok{1}\NormalTok{],}\StringTok{"Costco"}\NormalTok{,}\DataTypeTok{cex=}\DecValTok{1}\NormalTok{, }\DataTypeTok{pos=}\DecValTok{4}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(std[}\DecValTok{2}\NormalTok{],mu[}\DecValTok{2}\NormalTok{],}\StringTok{"Wallmart"}\NormalTok{,}\DataTypeTok{cex=}\DecValTok{1}\NormalTok{, }\DataTypeTok{pos=}\DecValTok{4}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(std[}\DecValTok{3}\NormalTok{],mu[}\DecValTok{3}\NormalTok{],}\StringTok{"Target"}\NormalTok{,}\DataTypeTok{cex=}\DecValTok{1}\NormalTok{, }\DataTypeTok{pos=}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW_01_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{graphics.off}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{q2.plot-the-efficient-frontier-with-and-without-short-sale-constraint.}{%
+\subsection{Q2.Plot the efficient frontier with and without short-sale
+constraint.}\label{q2.plot-the-efficient-frontier-with-and-without-short-sale-constraint.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{con =}\StringTok{ }\KeywordTok{gzcon}\NormalTok{(}\KeywordTok{url}\NormalTok{(}\StringTok{'https://github.com/systematicinvestor/SIT/raw/master/sit.gz'}\NormalTok{, }\StringTok{'rb'}\NormalTok{))}
+\KeywordTok{source}\NormalTok{(con)}
+\KeywordTok{close}\NormalTok{(con)}
+
+\NormalTok{tickers <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"COST"}\NormalTok{, }\StringTok{"WMT"}\NormalTok{, }\StringTok{"TGT"}\NormalTok{)}
+\NormalTok{n <-}\StringTok{ }\KeywordTok{length}\NormalTok{(tickers)}
+\CommentTok{#with short sale constraint.}
+\NormalTok{constraints =}\StringTok{ }\KeywordTok{new.constraints}\NormalTok{(n, }\DataTypeTok{lb =} \OperatorTok{-}\OtherTok{Inf}\NormalTok{, }\DataTypeTok{ub =} \OperatorTok{+}\OtherTok{Inf}\NormalTok{)}
+
+\NormalTok{constraints =}\StringTok{ }\KeywordTok{add.constraints}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, n), }\DecValTok{1}\NormalTok{, }\DataTypeTok{type =} \StringTok{'='}\NormalTok{, constraints)        }
+\NormalTok{ia<-}\StringTok{ }\KeywordTok{create.historical.ia}\NormalTok{(ret, }\DecValTok{250}\NormalTok{)}
+
+\NormalTok{weight <-}\StringTok{ }\KeywordTok{min.risk.portfolio}\NormalTok{(ia, constraints)}
+\CommentTok{#without short sale constraint.}
+\NormalTok{ia<-}\StringTok{ }\KeywordTok{create.historical.ia}\NormalTok{(ret, }\DecValTok{250}\NormalTok{)}
+\NormalTok{constraints =}\StringTok{ }\KeywordTok{new.constraints}\NormalTok{(n, }\DataTypeTok{lb =} \DecValTok{0}\NormalTok{, }\DataTypeTok{ub =} \DecValTok{1}\NormalTok{)}
+\NormalTok{constraints =}\StringTok{ }\KeywordTok{add.constraints}\NormalTok{(}\KeywordTok{diag}\NormalTok{(n), }\DataTypeTok{type=}\StringTok{'>='}\NormalTok{, }\DataTypeTok{b=}\DecValTok{0}\NormalTok{, constraints)}
+\NormalTok{constraints =}\StringTok{ }\KeywordTok{add.constraints}\NormalTok{(}\KeywordTok{diag}\NormalTok{(n), }\DataTypeTok{type=}\StringTok{'<='}\NormalTok{, }\DataTypeTok{b=}\DecValTok{1}\NormalTok{, constraints)}
+    
+\NormalTok{constraints =}\StringTok{ }\KeywordTok{add.constraints}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, n), }\DecValTok{1}\NormalTok{, }\DataTypeTok{type =} \StringTok{'='}\NormalTok{, constraints)  }
+
+\NormalTok{weight <-}\StringTok{ }\KeywordTok{min.risk.portfolio}\NormalTok{(ia, constraints)}
+\NormalTok{weight}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.233 0.000 0.767
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ifelse}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(corpcor), }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"corpcor"}\NormalTok{), }\KeywordTok{library}\NormalTok{(corpcor))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: corpcor
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'corpcor'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked _by_ '.GlobalEnv':
+## 
+##     cov.shrink
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "corpcor"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ifelse}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(lpSolve), }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"lpSolve"}\NormalTok{), }\KeywordTok{library}\NormalTok{(lpSolve))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: lpSolve
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "lpSolve"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ef =}\StringTok{ }\KeywordTok{portopt}\NormalTok{(ia, constraints, }\DecValTok{50}\NormalTok{, }\StringTok{'Efficient Frontier'}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'kernlab'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked _by_ '.GlobalEnv':
+## 
+##     cross
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ef}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $weight
+##        COST       TGT    WMT
+##  [1,] 0.233  0.00e+00 0.7670
+##  [2,] 0.249  6.49e-18 0.7513
+##  [3,] 0.264  4.78e-18 0.7357
+##  [4,] 0.280  3.08e-18 0.7200
+##  [5,] 0.296  1.37e-18 0.7044
+##  [6,] 0.311 -3.33e-19 0.6887
+##  [7,] 0.327 -2.04e-18 0.6731
+##  [8,] 0.343 -3.74e-18 0.6574
+##  [9,] 0.358 -5.45e-18 0.6418
+## [10,] 0.374 -7.16e-18 0.6261
+## [11,] 0.390 -8.86e-18 0.6105
+## [12,] 0.405 -1.06e-17 0.5948
+## [13,] 0.421 -1.23e-17 0.5792
+## [14,] 0.436 -1.40e-17 0.5635
+## [15,] 0.452 -1.57e-17 0.5479
+## [16,] 0.468 -1.74e-17 0.5322
+## [17,] 0.483 -1.91e-17 0.5165
+## [18,] 0.499 -2.08e-17 0.5009
+## [19,] 0.515 -2.25e-17 0.4852
+## [20,] 0.530 -2.42e-17 0.4696
+## [21,] 0.546 -2.59e-17 0.4539
+## [22,] 0.562 -2.76e-17 0.4383
+## [23,] 0.577 -2.93e-17 0.4226
+## [24,] 0.593 -3.10e-17 0.4070
+## [25,] 0.609 -3.27e-17 0.3913
+## [26,] 0.624 -3.45e-17 0.3757
+## [27,] 0.640 -3.62e-17 0.3600
+## [28,] 0.656 -3.79e-17 0.3444
+## [29,] 0.671 -3.96e-17 0.3287
+## [30,] 0.687 -4.13e-17 0.3131
+## [31,] 0.703 -4.30e-17 0.2974
+## [32,] 0.718 -4.47e-17 0.2818
+## [33,] 0.734 -4.64e-17 0.2661
+## [34,] 0.750 -4.81e-17 0.2504
+## [35,] 0.765 -4.98e-17 0.2348
+## [36,] 0.781 -5.15e-17 0.2191
+## [37,] 0.797 -5.32e-17 0.2035
+## [38,] 0.812 -5.49e-17 0.1878
+## [39,] 0.828 -5.66e-17 0.1722
+## [40,] 0.843 -5.83e-17 0.1565
+## [41,] 0.859 -6.00e-17 0.1409
+## [42,] 0.875 -6.17e-17 0.1252
+## [43,] 0.890 -6.35e-17 0.1096
+## [44,] 0.906 -6.52e-17 0.0939
+## [45,] 0.922 -6.69e-17 0.0783
+## [46,] 0.937 -6.86e-17 0.0626
+## [47,] 0.953 -7.03e-17 0.0470
+## [48,] 0.969 -7.20e-17 0.0313
+## [49,] 0.984 -7.37e-17 0.0157
+## [50,] 1.000  0.00e+00 0.0000
+## 
+## $return
+##        [,1]
+##  [1,] 0.103
+##  [2,] 0.103
+##  [3,] 0.103
+##  [4,] 0.103
+##  [5,] 0.103
+##  [6,] 0.103
+##  [7,] 0.104
+##  [8,] 0.104
+##  [9,] 0.104
+## [10,] 0.104
+## [11,] 0.104
+## [12,] 0.104
+## [13,] 0.104
+## [14,] 0.104
+## [15,] 0.104
+## [16,] 0.105
+## [17,] 0.105
+## [18,] 0.105
+## [19,] 0.105
+## [20,] 0.105
+## [21,] 0.105
+## [22,] 0.105
+## [23,] 0.105
+## [24,] 0.105
+## [25,] 0.106
+## [26,] 0.106
+## [27,] 0.106
+## [28,] 0.106
+## [29,] 0.106
+## [30,] 0.106
+## [31,] 0.106
+## [32,] 0.106
+## [33,] 0.107
+## [34,] 0.107
+## [35,] 0.107
+## [36,] 0.107
+## [37,] 0.107
+## [38,] 0.107
+## [39,] 0.107
+## [40,] 0.107
+## [41,] 0.107
+## [42,] 0.108
+## [43,] 0.108
+## [44,] 0.108
+## [45,] 0.108
+## [46,] 0.108
+## [47,] 0.108
+## [48,] 0.108
+## [49,] 0.108
+## [50,] 0.109
+## 
+## $risk
+##  [1] 0.252 0.252 0.252 0.252 0.252 0.253 0.253 0.253 0.254 0.254 0.255 0.256
+## [13] 0.256 0.257 0.258 0.259 0.259 0.260 0.261 0.262 0.263 0.265 0.266 0.267
+## [25] 0.268 0.270 0.271 0.273 0.274 0.276 0.277 0.279 0.281 0.282 0.284 0.286
+## [37] 0.288 0.289 0.291 0.293 0.295 0.297 0.299 0.302 0.304 0.306 0.308 0.310
+## [49] 0.313 0.315
+## 
+## $name
+## [1] "Efficient Frontier"
+\end{verbatim}
+
+\hypertarget{q3.-repeat-q1-and-q2-using-weekly-and-monthly-returns.}{%
+\subsection{Q3. Repeat Q1 and Q2 using weekly and monthly
+returns.}\label{q3.-repeat-q1-and-q2-using-weekly-and-monthly-returns.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tibbletime)}
+\KeywordTok{library}\NormalTok{(timetk)}
+\KeywordTok{library}\NormalTok{(fBasics)}
+\KeywordTok{library}\NormalTok{(quadprog)}
+ 
+\NormalTok{weekly <-}\StringTok{ }\NormalTok{prices }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{tk_tbl}\NormalTok{(}\DataTypeTok{rename_index=} \StringTok{"date"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{as_tbl_time}\NormalTok{(}\DataTypeTok{index=}\NormalTok{ date) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{as_period}\NormalTok{(}\DataTypeTok{period=} \StringTok{"week"}\NormalTok{, }\DataTypeTok{side=} \StringTok{"end"}\NormalTok{)}
+\NormalTok{Sigma1 =}\StringTok{ }\KeywordTok{cov}\NormalTok{(weekly[,}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{])}
+\NormalTok{std1 =}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{diag}\NormalTok{(Sigma1))}
+\NormalTok{mu =}\StringTok{ }\KeywordTok{apply}\NormalTok{(weekly[,}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{], }\DecValTok{2}\NormalTok{, mean)}
+
+\NormalTok{Amat2 =}\StringTok{ }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{),mu, }\KeywordTok{diag}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DataTypeTok{nrow=}\DecValTok{3}\NormalTok{))  }
+\KeywordTok{t}\NormalTok{(Amat2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    COST  TGT  WMT
+##     1.0  1.0  1.0
+## mu 44.1 36.3 38.2
+##     1.0  0.0  0.0
+##     0.0  1.0  0.0
+##     0.0  0.0  1.0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{muP2 =}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(mu)}\OperatorTok{+}\NormalTok{.}\DecValTok{0001}\NormalTok{, }\KeywordTok{max}\NormalTok{(mu)}\OperatorTok{-}\NormalTok{.}\DecValTok{0001}\NormalTok{,  }\DataTypeTok{length =} \DecValTok{150}\NormalTok{)}
+\NormalTok{sdP2 =}\StringTok{ }\NormalTok{muP2}
+\NormalTok{weights2 =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DataTypeTok{nrow=}\DecValTok{150}\NormalTok{,}\DataTypeTok{ncol=}\DecValTok{3}\NormalTok{) }
+
+\NormalTok{i=}\DecValTok{1}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(muP2))  }
+    
+\NormalTok{\{}
+\NormalTok{  bvec2 =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,muP2[i], }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{)) }
+\NormalTok{  result =}\StringTok{ }\KeywordTok{solve.QP}\NormalTok{(}\DataTypeTok{Dmat=}\DecValTok{2}\OperatorTok{*}\NormalTok{Sigma1,}\DataTypeTok{dvec=}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{),}\DataTypeTok{Amat=}\NormalTok{Amat2,}\DataTypeTok{bvec=}\NormalTok{bvec2,}\DataTypeTok{meq=}\DecValTok{2}\NormalTok{)}
+\NormalTok{  sdP2[i] =}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(result}\OperatorTok{$}\NormalTok{value)}
+\NormalTok{  weights2[i,] =}\StringTok{ }\NormalTok{result}\OperatorTok{$}\NormalTok{solution}
+\NormalTok{\}}
+
+\KeywordTok{plot}\NormalTok{(sdP2,muP2,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.25}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.08}\NormalTok{),}\DataTypeTok{lty=}\DecValTok{1}\NormalTok{)}
+\NormalTok{mufree.w =}\StringTok{ }\FloatTok{0.01}\OperatorTok{/}\DecValTok{12} 
+\KeywordTok{points}\NormalTok{(}\DecValTok{0}\NormalTok{,mufree.w,}\DataTypeTok{cex=}\DecValTok{3}\NormalTok{, }\DataTypeTok{pch=}\StringTok{"*"}\NormalTok{)  }
+\NormalTok{sharpe =( muP2}\OperatorTok{-}\NormalTok{mufree.w)}\OperatorTok{/}\NormalTok{sdP2}
+\NormalTok{ind1 =}\StringTok{ }\NormalTok{(sharpe }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(sharpe)) }
+\KeywordTok{options}\NormalTok{(}\DataTypeTok{digits=}\DecValTok{3}\NormalTok{)}
+\NormalTok{weights2[ind1,] }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.000255 0.248673 0.751072
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{lines}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{),mufree.w}\OperatorTok{+}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{)}\OperatorTok{*}\NormalTok{(muP2[ind1]}\OperatorTok{-}\NormalTok{mufree.w)}\OperatorTok{/}\NormalTok{sdP2[ind1],}\DataTypeTok{lwd=}\DecValTok{2}\NormalTok{,}\DataTypeTok{lty=}\DecValTok{3}\NormalTok{)}
+
+\KeywordTok{points}\NormalTok{(sdP2[ind1],muP2[ind1],}\DataTypeTok{cex=}\DecValTok{1}\NormalTok{,}\DataTypeTok{pch=}\DecValTok{19}\NormalTok{, }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{) }
+\NormalTok{ind2 =}\StringTok{ }\NormalTok{(sdP2 }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(sdP2)) }
+\KeywordTok{points}\NormalTok{(sdP2[ind2],muP2[ind2],}\DataTypeTok{cex=}\DecValTok{2}\NormalTok{,}\DataTypeTok{pch=}\StringTok{"+"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{) }
+\NormalTok{ind3 =}\StringTok{ }\NormalTok{(muP2 }\OperatorTok{>}\StringTok{ }\NormalTok{muP2[ind2])}
+\KeywordTok{lines}\NormalTok{(sdP2[ind3],muP2[ind3],}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,.}\DecValTok{25}\NormalTok{),}
+      \DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,.}\DecValTok{08}\NormalTok{),}\DataTypeTok{lwd=}\DecValTok{1}\NormalTok{)  }
+\KeywordTok{points}\NormalTok{(}\KeywordTok{c}\NormalTok{(std1[}\DecValTok{1}\NormalTok{],std1[}\DecValTok{2}\NormalTok{], std1[}\DecValTok{3}\NormalTok{]), }\KeywordTok{c}\NormalTok{(mu[}\DecValTok{1}\NormalTok{], mu[}\DecValTok{2}\NormalTok{], mu[}\DecValTok{3}\NormalTok{]), }\DataTypeTok{cex=}\DecValTok{1}\NormalTok{, }\DataTypeTok{pch=}\StringTok{"o"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{) }
+\KeywordTok{text}\NormalTok{(std1[}\DecValTok{1}\NormalTok{],mu[}\DecValTok{1}\NormalTok{],}\StringTok{"Costco"}\NormalTok{,}\DataTypeTok{cex=}\DecValTok{1}\NormalTok{, }\DataTypeTok{pos=}\DecValTok{4}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(std1[}\DecValTok{2}\NormalTok{],mu[}\DecValTok{2}\NormalTok{],}\StringTok{"Wallmart"}\NormalTok{,}\DataTypeTok{cex=}\DecValTok{1}\NormalTok{, }\DataTypeTok{pos=}\DecValTok{4}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(std1[}\DecValTok{3}\NormalTok{],mu[}\DecValTok{3}\NormalTok{],}\StringTok{"Target"}\NormalTok{,}\DataTypeTok{cex=}\DecValTok{1}\NormalTok{, }\DataTypeTok{pos=}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW_01_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{graphics.off}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{monthly <-}\StringTok{ }\NormalTok{prices }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{tk_tbl}\NormalTok{(}\DataTypeTok{rename_index=} \StringTok{"date"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{as_tbl_time}\NormalTok{(}\DataTypeTok{index=}\NormalTok{ date) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{as_period}\NormalTok{(}\DataTypeTok{period=} \StringTok{"month"}\NormalTok{, }\DataTypeTok{side=} \StringTok{"end"}\NormalTok{)}
+
+\NormalTok{Sigma2 =}\StringTok{ }\KeywordTok{cov}\NormalTok{(monthly[,}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{])}
+\NormalTok{std2=}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{diag}\NormalTok{(Sigma2))}
+\NormalTok{mu =}\StringTok{ }\KeywordTok{apply}\NormalTok{(monthly[,}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{], }\DecValTok{2}\NormalTok{, mean)}
+\NormalTok{Amat3 =}\StringTok{ }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{),mu, }\KeywordTok{diag}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DataTypeTok{nrow=}\DecValTok{3}\NormalTok{))}
+\KeywordTok{t}\NormalTok{(Amat3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    COST  TGT  WMT
+##     1.0  1.0  1.0
+## mu 44.2 36.3 38.3
+##     1.0  0.0  0.0
+##     0.0  1.0  0.0
+##     0.0  0.0  1.0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{muP3 =}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(mu)}\OperatorTok{+}\NormalTok{.}\DecValTok{0001}\NormalTok{,}\KeywordTok{max}\NormalTok{(mu)}\OperatorTok{-}\NormalTok{.}\DecValTok{0001}\NormalTok{,}\DataTypeTok{length=}\DecValTok{300}\NormalTok{)}
+\NormalTok{sdP3=}\StringTok{ }\NormalTok{muP3}
+\NormalTok{weights3=}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DataTypeTok{nrow=}\DecValTok{300}\NormalTok{,}\DataTypeTok{ncol=}\DecValTok{3}\NormalTok{) }
+
+\NormalTok{i=}\DecValTok{1}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(muP3))  }
+    
+\NormalTok{\{}
+\NormalTok{  bvec3 =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,muP3[i], }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{)) }
+\NormalTok{  result =}\StringTok{ }\KeywordTok{solve.QP}\NormalTok{(}\DataTypeTok{Dmat=}\DecValTok{2}\OperatorTok{*}\NormalTok{Sigma2,}\DataTypeTok{dvec=}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{),}\DataTypeTok{Amat=}\NormalTok{Amat3,}\DataTypeTok{bvec=}\NormalTok{bvec3,}\DataTypeTok{meq=}\DecValTok{2}\NormalTok{)}
+\NormalTok{  sdP3[i] =}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(result}\OperatorTok{$}\NormalTok{value)}
+\NormalTok{  weights3[i,] =}\StringTok{ }\NormalTok{result}\OperatorTok{$}\NormalTok{solution}
+\NormalTok{\}}
+
+\KeywordTok{plot}\NormalTok{(sdP3,muP3,}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.25}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.08}\NormalTok{),}\DataTypeTok{lty=}\DecValTok{1}\NormalTok{)}
+\NormalTok{mufree.m =}\StringTok{ }\FloatTok{0.01}\OperatorTok{/}\DecValTok{12} 
+\KeywordTok{points}\NormalTok{(}\DecValTok{0}\NormalTok{,mufree.m,}\DataTypeTok{cex=}\DecValTok{3}\NormalTok{, }\DataTypeTok{pch=}\StringTok{"*"}\NormalTok{)  }
+\NormalTok{sharpe =( muP3}\OperatorTok{-}\NormalTok{mufree.m)}\OperatorTok{/}\NormalTok{sdP3}
+\NormalTok{ind2 =}\StringTok{ }\NormalTok{(sharpe }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(sharpe)) }
+\KeywordTok{options}\NormalTok{(}\DataTypeTok{digits=}\DecValTok{3}\NormalTok{)}
+\NormalTok{weights3[ind2,] }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -2.02e-18  2.80e-01  7.20e-01
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{lines}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{),mufree.m}\OperatorTok{+}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{)}\OperatorTok{*}\NormalTok{(muP3[ind2]}\OperatorTok{-}\NormalTok{mufree.m)}\OperatorTok{/}\NormalTok{sdP3[ind2],}\DataTypeTok{lwd=}\DecValTok{2}\NormalTok{,}\DataTypeTok{lty=}\DecValTok{3}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(sdP3[ind2],muP3[ind2],}\DataTypeTok{cex=}\DecValTok{1}\NormalTok{,}\DataTypeTok{pch=}\DecValTok{19}\NormalTok{, }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{) }
+\NormalTok{ind2 =}\StringTok{ }\NormalTok{(sdP3 }\OperatorTok{==}\StringTok{ }\KeywordTok{min}\NormalTok{(sdP3)) }
+\KeywordTok{points}\NormalTok{(sdP3[ind2],muP3[ind2],}\DataTypeTok{cex=}\DecValTok{2}\NormalTok{,}\DataTypeTok{pch=}\StringTok{"+"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{) }
+
+\NormalTok{ind3 =}\StringTok{ }\NormalTok{(muP3 }\OperatorTok{>}\StringTok{ }\NormalTok{muP3[ind2])}
+\KeywordTok{lines}\NormalTok{(sdP3[ind3],muP3[ind3],}\DataTypeTok{type=}\StringTok{"l"}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,.}\DecValTok{25}\NormalTok{),}
+      \DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,.}\DecValTok{08}\NormalTok{),}\DataTypeTok{lwd=}\DecValTok{1}\NormalTok{) }
+\KeywordTok{points}\NormalTok{(}\KeywordTok{c}\NormalTok{(std[}\DecValTok{1}\NormalTok{],std[}\DecValTok{2}\NormalTok{], std[}\DecValTok{3}\NormalTok{]), }\KeywordTok{c}\NormalTok{(mu[}\DecValTok{1}\NormalTok{], mu[}\DecValTok{2}\NormalTok{], mu[}\DecValTok{3}\NormalTok{]), }\DataTypeTok{cex=}\DecValTok{1}\NormalTok{, }\DataTypeTok{pch=}\StringTok{"o"}\NormalTok{, }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{) }
+\KeywordTok{text}\NormalTok{(std[}\DecValTok{1}\NormalTok{],mu[}\DecValTok{1}\NormalTok{],}\StringTok{"Costco"}\NormalTok{,}\DataTypeTok{cex=}\DecValTok{1}\NormalTok{, }\DataTypeTok{pos=}\DecValTok{4}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(std[}\DecValTok{2}\NormalTok{],mu[}\DecValTok{2}\NormalTok{],}\StringTok{"Wallmart"}\NormalTok{,}\DataTypeTok{cex=}\DecValTok{1}\NormalTok{, }\DataTypeTok{pos=}\DecValTok{4}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(std[}\DecValTok{3}\NormalTok{],mu[}\DecValTok{3}\NormalTok{],}\StringTok{"Target"}\NormalTok{,}\DataTypeTok{cex=}\DecValTok{1}\NormalTok{, }\DataTypeTok{pos=}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW_01_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{graphics.off}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\end{document}

@@ -1,0 +1,59 @@
+---
+title: "Midterm exam-exercise"
+author: "Chantsal"
+date: "4/26/2020"
+output: html_document
+---
+## Problem1. Write a brief description of the time series plots of the four indices. Do the series look stationary? Do the ﬂuctuations in the series seem to be of constant size? If not, describe how the volatility ﬂuctuates.
+
+```{r }
+rm(list=ls())
+data(EuStockMarkets) 
+mode(EuStockMarkets) 
+class(EuStockMarkets) 
+plot(EuStockMarkets)
+
+logR = diff(log(EuStockMarkets)) 
+plot(logR)
+
+# Yes, the series alike stationary. 
+
+```
+## Problem2. Write a brief description of the time series plots of the four series of log returns. Do the series look stationary? Do the ﬂuctuations in the series seem to be of constant size? If not, describe how the volatility ﬂuctuates.
+```{r}
+plot(as.data.frame(logR))
+
+
+par(mfrow=c(2, 2)) 
+for(i in colnames(logR)) 
+{ 
+  qqnorm(logR[ ,i], datax = T, main = i) 
+  qqline(logR[ ,i], datax = T) 
+  print(shapiro.test(logR[ ,i])) 
+  }
+
+# The plots of the four series much heavier than the normal. As the Shapiro-Wilk tests in four series is less than 1 and the p-value is less than 0.05. So the null hyphotesis is supported with 5% and not supported with 95%.
+
+```
+
+## Problem 3. Brieﬂy describe the shape of each of the four normal plots and state whether the marginal distribution of each series is skewed or symmetric and whether its tails appear normal. If the tails do not appear normal, do they appear heavier or lighter than normal? What conclusions can be made from the Shapiro–Wilk tests? Include the plots with your work.
+```{r}
+n=dim(logR)[1] 
+q_grid = (1:n) / (n + 1) 
+df_grid = c(1, 4, 6, 10, 20, 30) 
+index.names = dimnames(logR)[[2]] 
+for(i in 1:4) 
+{ 
+  #dev.new() 
+  par(mfrow = c(3, 2)) 
+  for(df in df_grid) 
+  { 
+    qqplot(logR[,i], qt(q_grid,df), 
+       main = paste(index.names[i], ", df = ", df) ) 
+    abline(lm(qt(c(0.25, 0.75), df = df) ~ 
+    quantile(logR[,i], c(0.25, 0.75)))) 
+  }
+} 
+
+# When degree of freedom is equal to 6, each of the plot will be normal distribution. If the plots will be heavier or lighter than normal, the tails will not appear normal. 
+```

@@ -1,0 +1,425 @@
+---
+title: "HW_01"
+author: "Chantsal 108035487"
+date: "4/3/2020"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+## Q1. Try to find the min variance portfolio for three stocks
+        Using 2007-2009 daily returns as the insample data
+        
+```{r}
+library(quantmod)
+library(plyr)
+tickers <- c("COST", "WMT", "TGT")
+getSymbols(tickers, from= "2007-01-01", to= "2009-12-31")
+data.env<-new.env()
+l_ply(tickers, function(sym) try(getSymbols(sym, env=data.env), silent=T))
+stocks <- tickers[tickers %in% ls(data.env)]
+data <- xts()
+
+for(i in seq_along(stocks)) {
+  symbol <- stocks[i]
+  data <- merge(data, Ad(get(symbol, envir=data.env)))
+}
+
+head(data)
+str(data)
+con = gzcon(url('https://github.com/systematicinvestor/SIT/raw/master/sit.gz', 'rb'))
+source(con)
+close(con)
+
+```
+
+## In other words, you have to compute optimal weights for 2010-01
+        Also given the weights from Q1, compute realized returns for 2010-01.
+
+```{r}
+library(fBasics)
+library(xts)
+library(PerformanceAnalytics)
+firm.data= data
+str(firm.data)
+Sigma = cov(firm.data)
+std = sqrt(diag(Sigma))
+ones = rep(1,3)     
+one.vec = matrix(ones, ncol=1)
+a = inv(Sigma)%*%one.vec
+b = t(one.vec)%*%a
+mvp.w =a / as.numeric(b)
+mvp.w
+mvp.ret<-sum((mvp.w)*colMeans(firm.data))
+mvp.ret
+
+```
+
+## Give me weights, realized returns and standard deviation for 2010-01.
+
+```{r }
+mu<-0.05/12
+return <- firm.data
+Ax <- rbind(2*cov(return), colMeans(return), rep(1, ncol(return)))
+Ax <- cbind(Ax, rbind(t(tail(Ax, 2)), matrix(0, 2, 2)))
+b0 <- c(rep(0, ncol(return)), mu, 1)
+out<-solve(Ax, b0)
+wgt<-out[1:3]
+wgt
+sum(wgt)
+ret.out<-sum(wgt*colMeans(return))
+ret.out.annual<-ret.out*12
+ret.out.annual
+std.out<-sqrt(t(wgt)%*%cov(return)%*%wgt)
+std.out.annual<-std.out*sqrt(12)
+std.out.annual
+
+```
+
+
+## Q2. Based on Q1, you have to use weekly and monthly returns to get the answers to Q1
+```{r}
+rm(list=ls())
+con = gzcon(url('https://github.com/systematicinvestor/SIT/raw/master/sit.gz', 'rb'))
+source(con)
+close(con)
+library(quantmod)
+tickers <- c("COST","WMT","TGT")
+n <- length(tickers)
+
+data <- new.env()
+getSymbols(tickers, src = 'yahoo', from = '2007-01-01',to= '2009-12-31', env = data, auto.assign = T)
+for(i in ls(data)) data[[i]] = adjustOHLC(data[[i]], use.Adjusted=T)
+
+data.monthly <- new.env()
+for(i in tickers) data.monthly[[i]] = to.monthly(data[[i]], indexAt='endof')
+data.monthly
+
+bt.prep(data, align='remove.na', fill.gaps = T)
+names(data)
+head(data$prices)
+head(data$weight)
+
+prices <- data$prices   
+ret <- prices/mlag(prices)- 1
+head(ret)
+ret<- ret[-1, ]
+head(ret)
+```
+
+### Use weekly 
+
+```{r}
+library(tibbletime)
+library(timetk)
+ 
+weekly <- prices %>% 
+  tk_tbl(rename_index= "date") %>%
+    as_tbl_time(index= date) %>%
+    as_period(period= "week", side= "end")
+
+#Q1. min variance 
+str(weekly[,2:4])
+Sigma.w = cov(weekly[,2:4])
+std = sqrt(diag(Sigma.w))
+ones = rep(1,3)     
+one.vec = matrix(ones, ncol=1)
+a = inv(Sigma.w)%*%one.vec
+b = t(one.vec)%*%a
+mvp.w.w =a / as.numeric(b)
+mvp.w.w
+mvp.ret.w<-sum((mvp.w.w)*colMeans(weekly[,2:4]))
+mvp.ret.w
+
+mu.w<-0.05/12
+return<- weekly[,2:4]
+Ax <- rbind(2*cov(return), colMeans(return), rep(1, ncol(return)))
+Ax <- cbind(Ax, rbind(t(tail(Ax, 2)), matrix(0, 2, 2)))
+b0 <- c(rep(0, ncol(return)), mu.w, 1)
+out.w<-solve(Ax, b0)
+wgt<-out.w[1:3]
+wgt
+sum(wgt)
+ret.out<-sum(wgt*colMeans(return))
+ret.out.annual<-ret.out*12
+ret.out.annual
+std.out<-sqrt(t(wgt)%*%cov(return)%*%wgt)
+std.out.annual<-std.out*sqrt(12)
+std.out.annual
+
+```
+
+### use montly data 
+```{r}
+ monthly <- prices %>% 
+  tk_tbl(rename_index= "date") %>%
+    as_tbl_time(index= date) %>%
+    as_period(period= "month", side= "end")
+
+#Q1. min variance 
+str(monthly[,2:4])
+Sigma.m = cov(monthly[,2:4])
+std = sqrt(diag(Sigma.m))
+ones = rep(1,3)     
+one.vec = matrix(ones, ncol=1)
+a = inv(Sigma.m)%*%one.vec
+b = t(one.vec)%*%a
+mvp.w.m =a / as.numeric(b)
+mvp.w.m
+mvp.ret.m<-sum((mvp.w.m)*colMeans(monthly[,2:4]))
+mvp.ret.m
+
+mu.m<-0.05/12
+return.m<-monthly[,2:4]
+Ax.m <- rbind(2*cov(return.m), colMeans(return.m), rep(1, ncol(return.m)))
+Ax.m <- cbind(Ax, rbind(t(tail(Ax.m, 2)), matrix(0, 2, 2)))
+b0 <- c(rep(0, ncol(return.m)), mu.m, 1)
+out.m<-solve(Ax, b0)
+wgt.m<-out.m[1:3]
+wgt.m
+sum(wgt.m)
+ret.out.m<-sum(wgt.m*colMeans(return.m))
+ret.out.annual.m<-ret.out.m*12
+ret.out.annual.m
+std.out<-sqrt(t(wgt)%*%cov(return)%*%wgt)
+std.out.annual<-std.out*sqrt(12)
+std.out.annual
+
+```
+## Q3. Find the tangency portfolio based on Q2.
+```{r}
+mean <- apply(ret, 2, mean)
+mean
+
+var <- apply(ret, 2, var)
+var
+
+summary <- apply(ret, 2, summary)
+apply(ret, 2, skewness)
+
+cov.matrix <- matrix(cov(ret), ncol =3)
+cov.matrix
+
+mu <- matrix(mean, ncol=1)
+mu
+
+rf <- 0.005
+numerator <- solve(cov.matrix)%*% (mu - rf*one.vec)
+denominator <-t(one.vec)%*% numerator
+tangency.weight <-numerator/as.numeric(denominator)
+tangency.return<- t(mu)%*% tangency.weight
+tangency.var <- t(tangency.weight) %*% cov.matrix %*%tangency.weight
+tangency.std <- sqrt(as.numeric(tangency.var))
+Sharperatio <- (tangency.return/tangency.std)
+Sharperatio
+
+
+```
+#HW_02
+## Q1. Find the tangency portfolio with no short-sale constraint.
+     Risk-free rate is assumed to be 1% per annum.
+
+```{r}
+library(quantmod)
+library(plyr)
+library(xts)
+library(quadprog)
+library(fBasics)
+library(stats)
+tickers <- c("COST", "WMT", "TGT")
+getSymbols(tickers, from= "2007-01-01", to= "2009-12-31")
+data.env<-new.env()
+l_ply(tickers, function(sym) try(getSymbols(sym, env=data.env), silent=T))
+stocks <- tickers[tickers %in% ls(data.env)]
+data <- xts()
+
+for(i in seq_along(stocks)) {
+  symbol <- stocks[i]
+  data <- merge(data, Ad(get(symbol, envir=data.env)))
+}
+
+
+mu = apply(data, 2, mean)
+Sigma = cov(data)
+std = sqrt(diag(Sigma))
+Amat1 = cbind(rep(1,3),mu, diag(1,nrow=3))  
+t(Amat1)
+# muP = seq(.01,.08,length=300)  # set of 300 possible target values 
+# When short sales are prohibited, the target expected return on the 
+# portfolio must lie between the smallest 
+# and largest expected returns on the stocks. 
+muP = seq(min(mu)+.0001,max(mu)-.0001,length=300)
+sdP = muP # set up storage for standard deviations of portfolio returns
+weights = matrix(0,nrow=300,ncol=3) # storage for portfolio weights
+
+i=1
+for (i in 1:length(muP))  # find the optimal portfolios for each target expected return
+{
+  bvec1 = c(1,muP[i], rep(0,3))  # constraint vector
+  result = solve.QP(Dmat=2*Sigma,dvec=rep(0,3),Amat=Amat1,bvec=bvec1,meq=2)
+  sdP[i] = sqrt(result$value)
+  weights[i,] = result$solution
+}
+
+
+plot(sdP,muP,type="l",xlim=c(0,0.25),ylim=c(0,0.08),lty=1)
+par(new=TRUE)
+plot(sdP,muP,type="l",xlim=c(0,0.25),ylim=c(0,0.08),lty=1, col="green")
+mufree = 0.01/12 # input value of risk-free interest rate
+points(0,mufree,cex=3, pch="*")  # show risk-free asset
+sharpe =( muP-mufree)/sdP # compute Sharpe ratios
+ind = (sharpe == max(sharpe)) # Find maximum Sharpe ratio
+options(digits=3)
+weights[ind,] # Find tangency portfolio# show line of optimal portfolios
+lines(c(0,2),mufree+c(0,2)*(muP[ind]-mufree)/sdP[ind],lwd=2,lty=3)
+# show line of optimal portfolios
+points(sdP[ind],muP[ind],cex=1,pch=19, col="red") # show tangency portfolio
+ind2 = (sdP == min(sdP)) # find the minimum variance portfolio
+points(sdP[ind2],muP[ind2],cex=2,pch="+", col="blue") # show minimum variance portfolio
+ind3 = (muP > muP[ind2])
+lines(sdP[ind3],muP[ind3],type="l",xlim=c(0,.25),
+      ylim=c(0,.08),lwd=1)  #  plot the efficient frontier
+points(c(std[1],std[2], std[3]), c(mu[1], mu[2], mu[3]), cex=1, pch="o", col="red") 
+text(std[1],mu[1],"Costco",cex=1, pos=4)
+text(std[2],mu[2],"Wallmart",cex=1, pos=4)
+text(std[3],mu[3],"Target",cex=1, pos=4)
+graphics.off()
+
+```
+
+
+## Q2.Plot the efficient frontier with and without short-sale constraint.
+```{r}
+con = gzcon(url('https://github.com/systematicinvestor/SIT/raw/master/sit.gz', 'rb'))
+source(con)
+close(con)
+
+tickers <- c("COST", "WMT", "TGT")
+n <- length(tickers)
+#with short sale constraint.
+constraints = new.constraints(n, lb = -Inf, ub = +Inf)
+
+constraints = add.constraints(rep(1, n), 1, type = '=', constraints)        
+ia<- create.historical.ia(ret, 250)
+
+weight <- min.risk.portfolio(ia, constraints)
+#without short sale constraint.
+ia<- create.historical.ia(ret, 250)
+constraints = new.constraints(n, lb = 0, ub = 1)
+constraints = add.constraints(diag(n), type='>=', b=0, constraints)
+constraints = add.constraints(diag(n), type='<=', b=1, constraints)
+    
+constraints = add.constraints(rep(1, n), 1, type = '=', constraints)  
+
+weight <- min.risk.portfolio(ia, constraints)
+weight
+ifelse(!require(corpcor), install.packages("corpcor"), library(corpcor))
+ifelse(!require(lpSolve), install.packages("lpSolve"), library(lpSolve))
+ef = portopt(ia, constraints, 50, 'Efficient Frontier') 
+ef
+
+```
+
+
+## Q3. Repeat Q1 and Q2 using weekly and monthly returns.
+```{r}
+library(tibbletime)
+library(timetk)
+library(fBasics)
+library(quadprog)
+ 
+weekly <- prices %>% 
+  tk_tbl(rename_index= "date") %>%
+    as_tbl_time(index= date) %>%
+    as_period(period= "week", side= "end")
+Sigma1 = cov(weekly[,2:4])
+std1 = sqrt(diag(Sigma1))
+mu = apply(weekly[,2:4], 2, mean)
+
+Amat2 = cbind(rep(1,3),mu, diag(1,nrow=3))  
+t(Amat2)
+muP2 = seq(min(mu)+.0001, max(mu)-.0001,  length = 150)
+sdP2 = muP2
+weights2 = matrix(0,nrow=150,ncol=3) 
+
+i=1
+for (i in 1:length(muP2))  
+    
+{
+  bvec2 = c(1,muP2[i], rep(0,3)) 
+  result = solve.QP(Dmat=2*Sigma1,dvec=rep(0,3),Amat=Amat2,bvec=bvec2,meq=2)
+  sdP2[i] = sqrt(result$value)
+  weights2[i,] = result$solution
+}
+
+plot(sdP2,muP2,type="l",xlim=c(0,0.25),ylim=c(0,0.08),lty=1)
+mufree.w = 0.01/12 
+points(0,mufree.w,cex=3, pch="*")  
+sharpe =( muP2-mufree.w)/sdP2
+ind1 = (sharpe == max(sharpe)) 
+options(digits=3)
+weights2[ind1,] 
+lines(c(0,2),mufree.w+c(0,2)*(muP2[ind1]-mufree.w)/sdP2[ind1],lwd=2,lty=3)
+
+points(sdP2[ind1],muP2[ind1],cex=1,pch=19, col="red") 
+ind2 = (sdP2 == min(sdP2)) 
+points(sdP2[ind2],muP2[ind2],cex=2,pch="+", col="blue") 
+ind3 = (muP2 > muP2[ind2])
+lines(sdP2[ind3],muP2[ind3],type="l",xlim=c(0,.25),
+      ylim=c(0,.08),lwd=1)  
+points(c(std1[1],std1[2], std1[3]), c(mu[1], mu[2], mu[3]), cex=1, pch="o", col="red") 
+text(std1[1],mu[1],"Costco",cex=1, pos=4)
+text(std1[2],mu[2],"Wallmart",cex=1, pos=4)
+text(std1[3],mu[3],"Target",cex=1, pos=4)
+graphics.off()
+
+```
+
+
+```{r}
+monthly <- prices %>% 
+  tk_tbl(rename_index= "date") %>%
+    as_tbl_time(index= date) %>%
+    as_period(period= "month", side= "end")
+
+Sigma2 = cov(monthly[,2:4])
+std2= sqrt(diag(Sigma2))
+mu = apply(monthly[,2:4], 2, mean)
+Amat3 = cbind(rep(1,3),mu, diag(1,nrow=3))
+t(Amat3)
+muP3 = seq(min(mu)+.0001,max(mu)-.0001,length=300)
+sdP3= muP3
+weights3= matrix(0,nrow=300,ncol=3) 
+
+i=1
+for (i in 1:length(muP3))  
+    
+{
+  bvec3 = c(1,muP3[i], rep(0,3)) 
+  result = solve.QP(Dmat=2*Sigma2,dvec=rep(0,3),Amat=Amat3,bvec=bvec3,meq=2)
+  sdP3[i] = sqrt(result$value)
+  weights3[i,] = result$solution
+}
+
+plot(sdP3,muP3,type="l",xlim=c(0,0.25),ylim=c(0,0.08),lty=1)
+mufree.m = 0.01/12 
+points(0,mufree.m,cex=3, pch="*")  
+sharpe =( muP3-mufree.m)/sdP3
+ind2 = (sharpe == max(sharpe)) 
+options(digits=3)
+weights3[ind2,] 
+lines(c(0,2),mufree.m+c(0,2)*(muP3[ind2]-mufree.m)/sdP3[ind2],lwd=2,lty=3)
+points(sdP3[ind2],muP3[ind2],cex=1,pch=19, col="red") 
+ind2 = (sdP3 == min(sdP3)) 
+points(sdP3[ind2],muP3[ind2],cex=2,pch="+", col="blue") 
+
+ind3 = (muP3 > muP3[ind2])
+lines(sdP3[ind3],muP3[ind3],type="l",xlim=c(0,.25),
+      ylim=c(0,.08),lwd=1) 
+points(c(std[1],std[2], std[3]), c(mu[1], mu[2], mu[3]), cex=1, pch="o", col="red") 
+text(std[1],mu[1],"Costco",cex=1, pos=4)
+text(std[2],mu[2],"Wallmart",cex=1, pos=4)
+text(std[3],mu[3],"Target",cex=1, pos=4)
+graphics.off()
+
+```

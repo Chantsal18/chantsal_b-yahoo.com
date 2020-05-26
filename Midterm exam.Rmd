@@ -1,0 +1,164 @@
+---
+title: "Midterm exam"
+author: "Chantsal 108035487"
+date: "4/27/2020"
+output: html_document
+---
+# Download ETF daily data from yahoo with ticker names of SPY, QQQ, EEM, IWM, EFA, TLT, IYR, GLD from 2010 to 2018. 
+```{r}
+rm(list=ls())
+library(quantmod)
+library(quadprog)
+library(lpSolve)
+con = gzcon(url('https://github.com/systematicinvestor/SIT/raw/master/sit.gz', 'rb'))
+source(con)
+close(con)
+tickers <- c('SPY','QQQ','EEM','IWM','EFA','TLT','IYR','GLD')
+data <- new.env()
+getSymbols(tickers, src = 'yahoo', from = '2010-01-01',to= '2018-12-31', env = data, auto.assign = T)
+for(i in ls(data)) data[[i]] = adjustOHLC(data[[i]], use.Adjusted=T)
+
+bt.prep(data, align='remove.na', fill.gaps = T)
+names(data)
+head(data$prices)
+head(data$weight)
+
+```
+
+
+## Q1. Use the data to calculate daily returns. Find their means, median, 1-st quartile, third-quartile, standard deviation, skewness and kurtosis.
+```{r}
+prices = data$prices   
+n = ncol(prices)
+n
+
+ret = prices / mlag(prices) - 1
+ret
+
+means= mean(prices)
+means
+
+median(prices)
+
+sqrt(var(prices))
+
+sd(prices)
+
+Sigma= cov(prices)
+std = sqrt(diag(Sigma))
+
+quantile(prices)
+
+library(moments)
+skewness(prices)
+
+kurtosis(prices)
+
+```
+
+## Q2. Based on daily returns and their covariance matrix, and compute weights of minimum variance portfolio (MVP). 
+```{r}
+str(prices)
+Sigma = cov(prices)
+std = sqrt(diag(Sigma))
+ones = rep(1,8)     
+one.vec = matrix(ones, ncol=1)
+a = inv(Sigma)%*%one.vec
+b = t(one.vec)%*%a
+mvp.w =a / as.numeric(b)
+mvp.w
+mvp.ret<-sum((mvp.w)*colMeans(prices))
+mvp.ret
+
+
+```
+
+## Q3.By 2, now use year 2010-2013 data to calculate weekly returns and their covariance matrix, and compute weights of minimum variance portfolio (MVP).  (hints: you can use endpoints() to find weekly and monthly data. 
+
+```{r}
+library(xts)
+data.weekly <- ret[endpoints(ret, on="weeks", k=1), ]
+str(data.weekly)
+Sigma.w = cov(data.weekly)
+std = sqrt(diag(Sigma.w))
+ones = rep(1,8)     
+one.vec = matrix(ones, ncol=1)
+a = inv(Sigma.w)%*%one.vec
+b = t(one.vec)%*%a
+mvp.w.w =a / as.numeric(b)
+mvp.w.w
+mvp.ret.w<-sum((mvp.w.w)*colMeans(data.weekly))
+mvp.ret.w
+
+```
+
+## Q4.  By 3, now use year 2010-2013 data to calculate monthly returns and their covariance matrix, and compute weights of minimum variance portfolio (MVP). 
+```{r}
+data.monthly <- ret[endpoints(ret, on="months", k=1), ]
+str(data.monthly)
+Sigma.m = cov(data.monthly)
+std = sqrt(diag(Sigma.m))
+ones = rep(1,8)     
+one.vec = matrix(ones, ncol=1)
+a = inv(Sigma.m)%*%one.vec
+b = t(one.vec)%*%a
+mvp.w.m =a / as.numeric(b)
+mvp.w.m
+mvp.ret.m<-sum((mvp.w.m)*colMeans(data.monthly))
+mvp.ret.m
+```
+
+## Q5. Compute optimal weights for Q3 and Q4 when short selling is not allowed.
+```{r}
+
+
+```
+
+## Q6. Go to Fama French 3 factors data website:
+```{r}
+#a.	Compute its mean and covariance matrix using monthly data from 2010-2018.
+library(tidyverse)
+retdata= read_csv('F-F_Research_Data_Factors.CSV')
+colnames(retdata)[2]<- 'Mkt_RF'
+stock.rets<-retdata %>% select(c(2,3,4,5))/100
+N <- dim(stock.rets)[1]
+fit3 = lm(formula = cbind(RF)~Mkt_RF + SMB + HML, data=stock.rets)
+sigF3 = as.matrix(var(cbind(stock.rets$Mkt_RF, 
+                            stock.rets$SMB, 
+                            stock.rets$HML)))
+bbeta3 = as.matrix(fit3$coefficients)
+bbeta3 = bbeta3[-1,]
+bbeta3
+sigeps3 = crossprod(fit3$residuals)/(N-4)
+sigeps3 = diag(diag(sigeps3))
+
+X.3 = cbind(ones, stock.rets$Mkt_RF, stock.rets$SMB, stock.rets$HML)
+retdata1 = as.matrix(retdata[,c(2,3,4)]/100)
+b_hat.3 = solve(t(X.3)%*%(X.3))%*%t(X.3)%*%retdata1
+E_hat.3 = retdata1 - X.3%*%b_hat.3
+b_hat.3 = as.matrix(b_hat.3[-1,])
+diagD_hat.3 = diag(t(E_hat.3)%*%E_hat.3)/(N-4)
+cov_3f.3 = t(b_hat.3)*sigF3*b_hat.3 + diag(diagD_hat.3) 
+cov_3f.3
+
+# b.	Plot the returns of three factors from 2010-2018.
+
+
+```
+
+## Q7. Based on CAPM model, compute covariance matrix for the 8-asset portfolio by using past 60 monthly returns from 2014/01 - 2018/12.
+```{r}
+
+```
+
+
+## Q8. Based on FF 3-factor model, compute covariance matrix for the 8-asset portfolio by using past 60 monthly returns.
+```{r}
+
+```
+
+## Q9. Compute global minimum variance portfolio weights based on Q7 and Q8.
+```{r}
+
+```
+

@@ -1,0 +1,45 @@
+---
+title: "HW_04"
+author: "Chantsal 108035487"
+date: "4/14/2020"
+output: html_document
+---
+
+## Try to compute covariance matrix for three stocks based on the Fama-French three factor model.
+
+```{r}
+library(tidyverse)
+retdata = read_csv('FamaFrench_mon_69_98_3stocks.csv')
+glimpse(retdata)
+colnames(retdata)[2]<- 'Mkt_RF' 
+
+# Using FF 3 factor model to compute covariance matrix 
+stock.rets<-retdata %>% select(c(2,3,4,6,7,8))/100
+N <- dim(stock.rets)[1]
+fit3 = lm(formula = cbind(ge, ibm, mobil)~Mkt_RF + SMB + HML, data=stock.rets)
+sigF3 = as.matrix(var(cbind(stock.rets$Mkt_RF, 
+                            stock.rets$SMB, 
+                            stock.rets$HML)))
+bbeta3 = as.matrix(fit3$coefficients)
+bbeta3 = bbeta3[-1,]
+
+bbeta3
+sigeps3 = crossprod(fit3$residuals)/(N-4)
+sigeps3 = diag(diag(sigeps3))
+cov_3f = t(bbeta3) * sigF3 * (bbeta3) + sigeps3
+cov_3f
+
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
